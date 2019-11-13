@@ -56,13 +56,20 @@
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ 'assets/stylesheets/application.4031d38b.css' | url }}">
+      <link rel="stylesheet" href="{{ 'assets/stylesheets/application.616f542f.css' | url }}">
       {% if palette.primary or palette.accent %}
-        <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application-palette.825737f4.css">
+        <link rel="stylesheet" href="{{ 'assets/stylesheets/application-palette.58af11f1.css' | url }}">
+      {% endif %}
+      {% if palette.primary %}
+        {% import "partials/palette.html" as map %}
+        {% set primary = map.primary(
+          palette.primary | replace(" ", "-") | lower
+        ) %}
+        <meta name="theme-color" content="{{ primary }}">
       {% endif %}
     {% endblock %}
     {% block libs %}
-      <script src="{{ 'assets/javascripts/modernizr.74668098.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/modernizr.268332fc.js' | url }}"></script>
     {% endblock %}
     {% block fonts %}
       {% if font != false %}
@@ -186,7 +193,7 @@
       {% endblock %}
     </div>
     {% block scripts %}
-      <script src="{{ base_url }}/assets/javascripts/application.57ccfec4.js"></script>
+      <script src="{{ 'assets/javascripts/application.d79ca4e7.js' | url }}"></script>
       {% if lang.t("search.language") != "en" %}
         {% set languages = lang.t("search.language").split(",") %}
         {% if languages | length and languages[0] != "" %}
@@ -197,7 +204,7 @@
               {% if language == "ja" %}
                 <script src="{{ (path ~ 'tinyseg.js') | url }}"></script>
               {% endif %}
-              {% if language in ("da", "de", "es", "fi", "fr", "hu", "it", "ja", "nl", "no", "pt", "ro", "ru", "sv", "th", "tr") %}
+              {% if language in ("ar", "da", "de", "es", "fi", "fr", "hu", "it", "ja", "nl", "no", "pt", "ro", "ru", "sv", "th", "tr", "vi") %}
                 <script src="{{ (path ~ 'lunr.' ~ language ~ '.js') | url }}"></script>
               {% endif %}
             {% endif %}
